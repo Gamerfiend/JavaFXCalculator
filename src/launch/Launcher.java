@@ -11,6 +11,12 @@ import src.ui.CalculatorUI;
  */
 public class Launcher
 {
+    /**
+     * Main method that runs the program, uses static application from JavaFX to launch, taking a reference to our
+     * Calculator Class
+     *
+     * @param args command line arguments
+     */
     public static void main(String[] args)
     {
         Application.launch(CalculatorUI.class, args);

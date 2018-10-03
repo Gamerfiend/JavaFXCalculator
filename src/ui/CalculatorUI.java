@@ -2,6 +2,7 @@ package src.ui;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -15,6 +16,8 @@ import javafx.stage.Stage;
  */
 public class CalculatorUI extends Application
 {
+    public static final int CALCULATOR_HEIGHT = 500;
+    public static final int CALCULATOR_WIDTH = 500;
     /**
      * The main entry point for all JavaFX applications.
      * The start method is called after the init method has returned,
@@ -41,11 +44,18 @@ public class CalculatorUI extends Application
         primaryStage.show();
     }
 
+    private Button assembleButton()
+    {
+        return new Button();
+    }
+
     private Scene assembleScene()
     {
         GridPane gridPane = new GridPane();
         gridPane.setId("main-grid-pane");
 
-        return new Scene(gridPane, 500,500);
+
+
+        return new Scene(gridPane, CALCULATOR_WIDTH, CALCULATOR_HEIGHT);
     }
 }

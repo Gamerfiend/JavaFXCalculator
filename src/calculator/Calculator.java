@@ -1,7 +1,5 @@
 package src.calculator;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
 
 /**
  * Calculator class contains logic for calculator.
