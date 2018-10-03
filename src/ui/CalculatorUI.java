@@ -3,7 +3,6 @@ package src.ui;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -45,6 +44,7 @@ public class CalculatorUI extends Application
     private Scene assembleScene()
     {
         GridPane gridPane = new GridPane();
+        gridPane.setId("main-grid-pane");
 
         return new Scene(gridPane, 500,500);
     }
