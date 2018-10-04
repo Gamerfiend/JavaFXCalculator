@@ -88,6 +88,8 @@ public class CalculatorUI extends Application
             columnConstraints.add(new ColumnConstraints(COLUMN_CONSTRAINTS_WIDTH));
         }
 
+        gridPane.setAlignment(Pos.CENTER);
+
         return gridPane;
     }
 
