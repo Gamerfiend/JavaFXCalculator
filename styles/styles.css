@@ -1,3 +1,15 @@
 #main-grid-pane{
-    -fx-background-color: rgba(0, 0, 0, 0.05);
+    -fx-background-color: rgb(255, 101, 167);
+}
+
+#calculator-screen{
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-border-color: rgb(190, 190, 190);
+    -fx-border-width: 2px;
+}
+
+.calculator-buttons{
+    -fx-background-color: rgb(255, 161, 197);
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-font-family: Calibri;
 }
