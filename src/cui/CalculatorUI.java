@@ -1,4 +1,4 @@
-package src.ui;
+package src.cui;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -12,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 /**
@@ -71,36 +70,36 @@ public class CalculatorUI extends Application
         return newButton;
     }
 
-    private GridPane assembleGridPane(String styleID, int hGap, int vGap, int insetAmount, int numberColumns, int columnConstraintsWidth)
+    private GridPane assembleGridPane()
     {
         GridPane gridPane = new GridPane();
 
-        gridPane.setId(styleID);
+        gridPane.setId("main-grid-pane");
 
-        gridPane.setHgap(hGap);
-        gridPane.setVgap(vGap);
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
 
-        gridPane.setPadding(new Insets(insetAmount));
+        gridPane.setPadding(new Insets(10));
 
         ObservableList<ColumnConstraints> columnConstraints = gridPane.getColumnConstraints();
 
-        for (int i = 1; i <= numberColumns; i++)
+        for (int i = 1; i <= NUM_COLS; i++)
         {
-            columnConstraints.add(new ColumnConstraints(columnConstraintsWidth));
+            columnConstraints.add(new ColumnConstraints(COLUMN_CONSTRAINTS_WIDTH));
         }
 
         return gridPane;
     }
 
-    private GridPane addToGridPane(GridPane gridPane, Node itemToAdd, int columnIndex, int rowIndex, int colSpan, int rowSpan)
+    private GridPane addToGridPane(GridPane gridPane, Node itemToAdd, int columnIndex, int rowIndex, int colSpan)
     {
-        gridPane.add(itemToAdd, columnIndex, rowIndex, colSpan, rowSpan);
+        gridPane.add(itemToAdd, columnIndex, rowIndex, colSpan, 1);
         return gridPane;
     }
 
     private Scene assembleScene()
     {
-        GridPane gridPane = assembleGridPane("main-grid-pane", 10, 10, 10, NUM_COLS, COLUMN_CONSTRAINTS_WIDTH);
+        GridPane gridPane = assembleGridPane();
 
         Label calculatorScreen = new Label();
         calculatorScreen.setText("0");
@@ -108,7 +107,7 @@ public class CalculatorUI extends Application
         calculatorScreen.setAlignment(Pos.CENTER_RIGHT);
         calculatorScreen.setMaxWidth(Double.MAX_VALUE);
 
-        addToGridPane(gridPane, calculatorScreen, 0, 0, 4, 1);
+        addToGridPane(gridPane, calculatorScreen, 0, 0, 4);
 
         int rowIndex = 1;
         int columnIndex = 1;
@@ -122,18 +121,21 @@ public class CalculatorUI extends Application
 
             if (element.equals("Enter"))
             {
-                gridPane = addToGridPane(gridPane, assembleButton(element, null), columnIndex - 1, rowIndex - 1, 2, 1);
+                gridPane = addToGridPane(gridPane,
+                        assembleButton(element, null),
+                        columnIndex - 1, rowIndex - 1, 2);
                 columnIndex++;
             }
             else
             {
-                gridPane = addToGridPane(gridPane, assembleButton(element, null), columnIndex - 1, rowIndex - 1, 1, 1);
+                gridPane = addToGridPane(gridPane,
+                        assembleButton(element, event -> System.out.println(element)),
+                        columnIndex - 1, rowIndex - 1, 1);
             }
 
             columnIndex += 1;
 
         }
-        System.out.println(gridPane.impl_getColumnCount());
         return new Scene(gridPane, CALCULATOR_WIDTH, CALCULATOR_HEIGHT);
     }
 }

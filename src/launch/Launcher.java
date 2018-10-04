@@ -1,7 +1,7 @@
 package src.launch;
 
 import javafx.application.Application;
-import src.ui.CalculatorUI;
+import src.cui.CalculatorUI;
 
 /**
  * Launcher class is very simply a wrapper that launches the calculator application
