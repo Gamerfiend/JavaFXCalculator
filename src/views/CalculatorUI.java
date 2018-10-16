@@ -1,4 +1,4 @@
-package src.cui;
+package src.views;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import src.controller.CalcController;
 
 /**
  * CalculatorUI inherits from JavaFX application, and it handles all the visual functionality of the
@@ -28,12 +29,13 @@ public class CalculatorUI extends Application
     public static final int CALCULATOR_WIDTH = 200;
 
     public static final int NUM_COLS = 3;
-    public static final int NUM_BOXES = 3;
 
     public static final int COLUMN_CONSTRAINTS_WIDTH = 40;
     public static final String[] CalculatorButtonFaces = {"7", "8", "9", "+", "4", "5", "6",
-            "-", "1", "2", "3", "*", "0", "Enter", "/"};
+            "-", "1", "2", "3", "*", "0", "Enter", "/", "CE"};
 
+    private final CalcController controller = new CalcController(CalculatorUI.this);
+    private Label calculatorScreen;
     /**
      * The main entry point for all JavaFX applications.
      * The start method is called after the init method has returned,
@@ -99,15 +101,27 @@ public class CalculatorUI extends Application
         return gridPane;
     }
 
+    /**
+     *  Simply set's the text of the calculator
+     * @param text to be set
+     */
+    public void updateLabel(String text)
+    {
+        calculatorScreen.setText(text);
+    }
+
     private Scene assembleScene()
     {
         GridPane gridPane = assembleGridPane();
 
-        Label calculatorScreen = new Label();
+        calculatorScreen = new Label();
         calculatorScreen.setText("0");
         calculatorScreen.setId("calculator-screen");
         calculatorScreen.setAlignment(Pos.CENTER_RIGHT);
         calculatorScreen.setMaxWidth(Double.MAX_VALUE);
+
+
+
 
         addToGridPane(gridPane, calculatorScreen, 0, 0, 4);
 
@@ -124,14 +138,14 @@ public class CalculatorUI extends Application
             if (element.equals("Enter"))
             {
                 gridPane = addToGridPane(gridPane,
-                        assembleButton(element, null),
+                        assembleButton(element, event -> controller.processEvent(element)),
                         columnIndex - 1, rowIndex - 1, 2);
                 columnIndex++;
             }
             else
             {
                 gridPane = addToGridPane(gridPane,
-                        assembleButton(element, event -> System.out.println(element)),
+                        assembleButton(element, event -> controller.processEvent(element)),
                         columnIndex - 1, rowIndex - 1, 1);
             }
 
@@ -139,5 +153,13 @@ public class CalculatorUI extends Application
 
         }
         return new Scene(gridPane, CALCULATOR_WIDTH, CALCULATOR_HEIGHT);
+    }
+
+    @Override
+    public String toString()
+    {
+        return "CalculatorUI{" +
+                "controller=" + controller +
+                '}';
     }
 }
